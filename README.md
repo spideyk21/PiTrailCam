@@ -1,7 +1,8 @@
 PiTrailCam
+==========
 Raspberry Pi based Trail Camera with time-lapse, video, and upload functionality (dropbox).
 
-Hardware:
+###Hardware:
 -Raspberry Pi Model A, A+, B, B+, Pi 2, or Pi3 (pi zero will not work as it does not have the camera option)
 -SD Card
 -Raspberry Pi Camera
@@ -10,10 +11,9 @@ Hardware:
 -Wifi Module
 -Battery Backup
 
-Software:
+###Software:
 -Raspbian (latest)
 
+###Setup:
 
-Setup:
-
-Options:
+###Options:
