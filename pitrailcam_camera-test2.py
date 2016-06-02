@@ -16,7 +16,7 @@
 #==============================================================================
 
 # Import required Python libraries
-from gpiozero import LED, MotionSensor
+from gpiozero import LED, MotionSensor, Button
 from signal import pause
 import time
 import os
