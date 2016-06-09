@@ -6,6 +6,7 @@
 #version         : X.X
 #usage           : 
 #refrence        : http://www.raspberrypi.org/documentation/usage/camera/python/README.md
+#				   http://picamera.readthedocs.io/
 #				   https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
 #				   http://www.afraidofsunlight.co.uk/weather/trailcam_info.html
 #				   http://richardhayler.blogspot.co.uk/2016/05/naturebytes-lite-bare-bones-build-for.html
@@ -24,11 +25,14 @@ import os
 import logging
 
 #Dip Switch Settings
-dip_cmode = Button(#) #capture mode: picture/video (false=picture, true=video)
+dip_cmode = Button(#) #capture mode: picture/video (true=picture, false=video)
 dip_pmode = Button(#) #Picture/Time-Lapse Mode (false=Single Picture, false=Time Lapse)
 dip_time1 = Button(#) #Time #1 Delay Between Time Lapse Pictures, or Length of Video to Capture
 dip_time2 = Button(#) #Time #2 Delay Between Time Lapse Pictures, or Length of Video to Capture
 dip_time3 = Button(#) #Time #3 Delay Between Time Lapse Pictures, or Length of Video to Capture
+
+#LED's
+led_active = LED(#) #Flashs when picture is taken or video is being recorded.
 
 camera = picamera.PiCamera
 pir = MotionSensor(#) #set pir pin number
@@ -47,7 +51,20 @@ def take_video():
 	camera.start_recording('video.h264')
 	
 while True:
-    pir.wait_for_motion()
+    if dip_cmode.is_pressed:
+		print("Camera Mode")
+		if pir.motion_detected:
+		#    logging.info('Motion detected')
+			print('Motion detected')
+	
+	else:
+		print("Video Mode")
+		if pir.motion_detected:
+		#    logging.info('Motion detected')
+			print('Motion detected')
+		
+		
+	pir.wait_for_motion()
 #    logging.info('Motion detected')
     print('Motion detected')
     while pir.motion_detected:
