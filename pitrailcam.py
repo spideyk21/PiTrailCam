@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #title           : pitrailcam.py
 #description     : Raspberry Pi based Trailcam
 #author          : spideyk21
@@ -22,11 +22,11 @@ from signal import pause
 from datetime import datetime
 import time
 import os
-import logging
 
 #Dip Switch Settings
 dip_cmode = Button(#) #capture mode: picture/video (true=picture, false=video)
-dip_pmode = Button(#) #Picture/Time-Lapse Mode (false=Single Picture, false=Time Lapse)
+dip_pmode = Button(#) #Picture Mode: Motion Activated=true, Time Lapse=false
+
 dip_button1 = Button(#) #Time #1 Delay Between Time Lapse Pictures, or Length of Video to Capture
 dip_button2 = Button(#) #Time #2 Delay Between Time Lapse Pictures, or Length of Video to Capture
 dip_button3 = Button(#) #Time #3 Delay Between Time Lapse Pictures, or Length of Video to Capture
@@ -53,28 +53,20 @@ def take_video():
 while True:
     if dip_cmode.is_pressed:
 		print("Camera Mode")
-		if pir.motion_detected:
-		#    logging.info('Motion detected')
-			print('Motion detected')
-	
+		if dip_pmode.is_pressed:
+			print("Motion Activated Capture")
+				if pir.motion_detected:
+					print('Motion detected')
+					ts  ='{:%H%M%S-%d%m%Y}'.format(datetime.now())
+						with picamera.PiCamera() as cam:
+						cam.resolution=(1024,768)
+						cam.capture('/home/pi/'+str(ts)+'.jpg')
+					time.sleep(1) #let pir settle
+					print('Motion Ended')
+		else:
+			print("Timelapse Capture")
+			
 	else:
 		print("Video Mode")
 		if pir.motion_detected:
-		#    logging.info('Motion detected')
 			print('Motion detected')
-		
-		
-	pir.wait_for_motion()
-#    logging.info('Motion detected')
-    print('Motion detected')
-    while pir.motion_detected:
-        print('Taking photo')
-        ts  ='{:%H%M%S-%d%m%Y}'.format(datetime.now())
-#        logging.info('Taking photo: '+ str(ts)+'.jpg')
-        with picamera.PiCamera() as cam:
-            cam.resolution=(1024,768)
-            cam.capture('/home/pi/'+str(ts)+'.jpg')
-        time.sleep(0.5)
-    print('Motion Ended')
-
-#    logging.info('Motion Ended')
