@@ -27,9 +27,9 @@ import logging
 #Dip Switch Settings
 dip_cmode = Button(#) #capture mode: picture/video (true=picture, false=video)
 dip_pmode = Button(#) #Picture/Time-Lapse Mode (false=Single Picture, false=Time Lapse)
-dip_time1 = Button(#) #Time #1 Delay Between Time Lapse Pictures, or Length of Video to Capture
-dip_time2 = Button(#) #Time #2 Delay Between Time Lapse Pictures, or Length of Video to Capture
-dip_time3 = Button(#) #Time #3 Delay Between Time Lapse Pictures, or Length of Video to Capture
+dip_button1 = Button(#) #Time #1 Delay Between Time Lapse Pictures, or Length of Video to Capture
+dip_button2 = Button(#) #Time #2 Delay Between Time Lapse Pictures, or Length of Video to Capture
+dip_button3 = Button(#) #Time #3 Delay Between Time Lapse Pictures, or Length of Video to Capture
 
 #LED's
 led_active = LED(#) #Flashs when picture is taken or video is being recorded.
