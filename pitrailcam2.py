@@ -23,14 +23,20 @@ import time
 pir = MotionSensor(17)
 camera = PiCamera()
 
-#dip_cmode = Button(#)
-#dip_pmode = Button(#)
+dip_cmode = Button(#) #capture mode: picture/video (true=picture, false=video)
+dip_pmode = Button(#) #Picture Mode: Motion Activated=true, Time Lapse=false
+
 #dip_time1 = Button(#)
 #dip_time2 = Button(#)
 #dip_time3 = Button(#)
+
+#extra
 #dip_button6 = Button(#)
 #dip_button7 = Button(#)
 #dip_button8 = Button(#)
+
+pic_loc: "/home/pi/Pictures/"
+vid_loc: "home/pi/Videos/"
 
 
 while True:
